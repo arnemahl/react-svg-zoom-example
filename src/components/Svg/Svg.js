@@ -66,9 +66,7 @@ function usePan(viewBox, setViewBox) {
   return { onMouseDown }
 }
 
-export default function App() {
-  const [viewBox, setViewBox] = React.useState([0, 0, fullWidth, fullHeight])
-
+function useZoom(viewBox, setViewBox) {
   const onWheel = React.useCallback((event) => {
     const d = event.deltaY / 10
     const [x, y, width, height] = viewBox
@@ -87,7 +85,14 @@ export default function App() {
     setViewBox(nextViewBox)
   }, [viewBox, setViewBox])
 
-  const { onMouseDown } = usePan(viewBox, setViewBox)
+  return { onWheel }
+}
+
+export default function App() {
+  const [viewBox, setViewBox] = React.useState([0, 0, fullWidth, fullHeight])
+
+  const { onWheel, zoom } = useZoom(viewBox, setViewBox)
+  const { onMouseDown } = usePan(viewBox, setViewBox, zoom)
 
   return (
     <svg
