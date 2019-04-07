@@ -18,8 +18,8 @@ export function usePan(viewBox, setViewBox) {
 
       function onMouseMove(event) {
         const [x, y, width, height] = viewBox
-        const dx = event.movementX * width / fullWidth
-        const dy = event.movementY * height / fullHeight
+        const dx = event.movementX * width / fullWidth / 2
+        const dy = event.movementY * height / fullHeight / 2
         const [nextX, nextY, nextWidth, nextHeight] = [x - dx, y - dy, width, height]
 
         // Prevent panning too far
