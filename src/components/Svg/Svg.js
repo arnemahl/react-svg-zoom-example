@@ -24,12 +24,40 @@ export default function App() {
     setViewBox(nextViewBox)
   }, [viewBox, setViewBox])
 
+  const onMouseDown = React.useCallback((event) => {
+    function onMouseMove(event) {
+      const { movementX: dx, movementY: dy } = event
+      const [x, y, width, height] = viewBox
+      const [nextX, nextY, nextWidth, nextHeight] = [x - dx, y - dy, width, height]
+
+      // Prevent panning too far
+      if (
+        nextX < 0 ||
+        nextY < 0 ||
+        nextX + nextWidth > fullWidth ||
+        nextY + nextHeight > fullHeight
+      ) {
+        return
+      }
+
+      setViewBox([nextX, nextY, nextWidth, nextHeight])
+    }
+    function onMouseUp(event) {
+      window.removeEventListener("mousemove", onMouseMove)
+      window.removeEventListener("mouseup", onMouseUp)
+    }
+
+    window.addEventListener("mousemove", onMouseMove)
+    window.addEventListener("mouseup", onMouseUp)
+  }, [viewBox, setViewBox])
+
   return (
     <svg
       width="500px"
       height="500px"
       viewBox={viewBox.join(" ")}
       onWheel={onWheel}
+      onMouseDown={onMouseDown}
     >
       <rect
         x={0}
