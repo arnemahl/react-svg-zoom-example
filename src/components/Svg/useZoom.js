@@ -5,19 +5,19 @@ export function useZoom(viewBox, setViewBox) {
   const onWheel = React.useCallback((event) => {
     const d = event.deltaY / 10
     const [x, y, width, height] = viewBox
-    const nextViewBox = [x - d / 2, y - d / 2, width + d, height + d]
+    const [nextX, nextY, nextWidth, nextHeight] = [x - d / 2, y - d / 2, width + d, height + d]
 
     // Prevent zooming too far in
-    if (nextViewBox[3] <= 0 || nextViewBox[4] <= 0) {
+    if (nextWidth <= 0 || nextHeight <= 0) {
       return
     }
 
     // Prevent zooming too far out
-    if (nextViewBox[3] > fullWidth || nextViewBox[4] <= fullHeight) {
+    if (nextWidth > fullWidth || nextHeight > fullHeight) {
       return
     }
 
-    setViewBox(nextViewBox)
+    setViewBox([nextX, nextY, nextWidth, nextHeight])
   }, [viewBox, setViewBox])
 
   return { onWheel }
