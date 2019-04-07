@@ -1,9 +1,18 @@
 import React from 'react';
+import Svg from 'components/Svg/Svg';
 
 export default function App() {
   return (
-    <div>
-      Hello
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center'
+      }}
+    >
+      <div>
+        <h1>Hello</h1>
+        <Svg />
+      </div>
     </div>
   );
 }
