@@ -1,20 +1,35 @@
 import React from 'react';
 
+const fullWidth = 100;
+const fullHeight = 100;
+
 export default function App() {
-  const width = 100;
-  const height = 100;
+  const [viewBox, setViewBox] = React.useState([0, 0, fullWidth, fullHeight])
 
-  const [viewBox, setViewBox] = React.useState([0, 0, width, height])
+  function onWheel(event) {
+    const d = event.deltaY / 10
+    const [x, y, width, height] = viewBox
+    const nextViewBox = [x - d / 2, y - d / 2, width + d, height + d]
 
-  React.useEffect(() => {
-    window.addEventListener('scroll', console.log)
-  }, [viewBox, setViewBox])
+    // Prevent zooming too far in
+    if (nextViewBox[3] <= 0 || nextViewBox[4] <= 0) {
+      return
+    }
+
+    // Prevent zooming too far out
+    if (nextViewBox[3] > fullWidth || nextViewBox[4] <= fullHeight) {
+      return
+    }
+
+    setViewBox(nextViewBox)
+  }
 
   return (
     <svg
       width="500px"
       height="500px"
       viewBox={viewBox.join(" ")}
+      onWheel={onWheel}
     >
       <rect
         x={0}
