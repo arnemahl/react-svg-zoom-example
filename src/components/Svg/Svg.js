@@ -6,7 +6,7 @@ const fullHeight = 100;
 export default function App() {
   const [viewBox, setViewBox] = React.useState([0, 0, fullWidth, fullHeight])
 
-  function onWheel(event) {
+  const onWheel = React.useCallback((event) => {
     const d = event.deltaY / 10
     const [x, y, width, height] = viewBox
     const nextViewBox = [x - d / 2, y - d / 2, width + d, height + d]
@@ -22,7 +22,7 @@ export default function App() {
     }
 
     setViewBox(nextViewBox)
-  }
+  }, [viewBox, setViewBox])
 
   return (
     <svg
