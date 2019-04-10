@@ -11,7 +11,7 @@ export default function App() {
     >
       <div>
         <h1>Hello</h1>
-        <Svg />
+        <Svg width={300} height={200} />
       </div>
     </div>
   );
