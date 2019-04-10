@@ -14,6 +14,7 @@ export function useZoom(viewBox, setViewBox) {
 
     // Prevent zooming too far out
     if (nextWidth > fullWidth || nextHeight > fullHeight) {
+      setViewBox([0, 0, fullWidth, fullHeight])
       return
     }
 
