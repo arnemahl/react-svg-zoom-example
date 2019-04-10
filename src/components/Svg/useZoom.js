@@ -3,8 +3,8 @@ import { fullWidth, fullHeight } from './dimensions.js'
 
 export function useZoom(viewBox, setViewBox) {
   const onWheel = React.useCallback((event) => {
-    const d = event.deltaY / 10
     const [x, y, width, height] = viewBox
+    const d = event.deltaY * (0.003 * Math.max(width, height))
     let [nextX, nextY, nextWidth, nextHeight] = [x - d / 2, y - d / 2, width + d, height + d]
 
     // Prevent zooming too far in
