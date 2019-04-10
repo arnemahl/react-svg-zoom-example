@@ -3,7 +3,7 @@ import { fullWidth, fullHeight } from "./dimensions.js";
 import { useZoom } from "./useZoom";
 import { usePan } from "./usePan";
 
-export default function App() {
+export default function App({ width, height }) {
   const [viewBox, setViewBox] = React.useState([0, 0, fullWidth, fullHeight]);
 
   const { onWheel, zoom } = useZoom(viewBox, setViewBox);
@@ -11,15 +11,19 @@ export default function App() {
 
   return (
     <svg
-      width="500px"
-      height="500px"
+      width={`${width}px`}
+      height={`${height}px`}
       viewBox={viewBox.join(" ")}
       onWheel={onWheel}
       onMouseDown={onMouseDown}
     >
-      <rect x={0} y={0} width={100} height={100} fill="black" />
-      <rect x={1} y={1} width={98} height={98} fill="blue" />
-      <rect x={45} y={45} width={10} height={10} fill="black" />
+      <image
+        href="https://3lhowb48prep40031529g5yj-wpengine.netdna-ssl.com/wp-content/uploads/2012/09/photo22.jpg"
+        x={0}
+        y={0}
+        width={`${width}px`}
+        height={`${height}px`}
+      />
     </svg>
   );
 }
