@@ -1,7 +1,6 @@
 import React from "react";
-import { fullWidth, fullHeight } from "./dimensions.js";
 
-export function usePan(viewBox, setViewBox) {
+export function usePan(viewBox, setViewBox, fullWidth, fullHeight) {
   const [pressedPos, setPressedPos] = React.useState(void 0);
 
   const onMouseDown = React.useCallback(

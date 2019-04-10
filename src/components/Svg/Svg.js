@@ -1,13 +1,11 @@
 import React from "react";
-import { fullWidth, fullHeight } from "./dimensions.js";
 import { useZoom } from "./useZoom";
 import { usePan } from "./usePan";
 
 export default function App({ width, height }) {
-  const [viewBox, setViewBox] = React.useState([0, 0, fullWidth, fullHeight]);
-
-  const { onWheel } = useZoom(viewBox, setViewBox);
-  const { onMouseDown } = usePan(viewBox, setViewBox);
+  const [viewBox, setViewBox] = React.useState([0, 0, width, height]);
+  const { onWheel } = useZoom(viewBox, setViewBox, width, height);
+  const { onMouseDown } = usePan(viewBox, setViewBox, width, height);
 
   return (
     <svg
@@ -17,7 +15,7 @@ export default function App({ width, height }) {
       onWheel={onWheel}
       onMouseDown={onMouseDown}
       onDoubleClick={e => {
-        setViewBox([0, 0, fullWidth, fullHeight]);
+        setViewBox([0, 0, width, height]);
       }}
     >
       <image

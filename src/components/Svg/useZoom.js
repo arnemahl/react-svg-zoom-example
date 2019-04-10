@@ -1,7 +1,6 @@
 import React from "react";
-import { fullWidth, fullHeight } from "./dimensions.js";
 
-export function useZoom(viewBox, setViewBox) {
+export function useZoom(viewBox, setViewBox, fullWidth, fullHeight) {
   const onWheel = React.useCallback(
     event => {
       const [x, y, width, height] = viewBox;
