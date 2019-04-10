@@ -22,17 +22,13 @@ export function usePan(viewBox, setViewBox) {
         const dy = event.movementY * height / fullHeight / 2
         const [nextX, nextY, nextWidth, nextHeight] = [x - dx, y - dy, width, height]
 
-        // Prevent panning too far
-        if (
-          nextX < 0 ||
-          nextY < 0 ||
-          nextX + nextWidth > fullWidth ||
-          nextY + nextHeight > fullHeight
-        ) {
-          return
-        }
-
-        setViewBox([nextX, nextY, nextWidth, nextHeight])
+        // Math.max/min: Prevent panning too far
+        setViewBox([
+          Math.max(0, Math.min(fullWidth - nextWidth, nextX)),
+          Math.max(0, Math.min(fullHeight - nextHeight, nextY)),
+          nextWidth,
+          nextHeight,
+        ])
       }
       window.addEventListener("mousemove", onMouseMove)
       return () => {
