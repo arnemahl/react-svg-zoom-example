@@ -1,13 +1,27 @@
 import React from "react";
 
+function getX(event, viewBox, boundingClientRect) {
+  const x = event.clientX - boundingClientRect.x;
+  const scale = viewBox[2] / boundingClientRect.width;
+
+  return viewBox[0] + x * scale;
+}
+
+function getY(event, viewBox, boundingClientRect) {
+  const y = event.clientY - boundingClientRect.y;
+  const scale = viewBox[3] / boundingClientRect.height;
+
+  return viewBox[1] + y * scale;
+}
+
 export function useDrawRects(boundingClientRect, viewBox) {
   const [rect, setRect] = React.useState(void 0);
   const [finishedRects, setFinishedRects] = React.useState([]);
 
   const getPos = React.useMemo(() => (event) => {
     return {
-      x: event.screenX - boundingClientRect.x,
-      y: event.screenY - boundingClientRect.y,
+      x: getX(event, viewBox, boundingClientRect),
+      y: getY(event, viewBox, boundingClientRect),
     };
   }, [boundingClientRect, viewBox]);
 
