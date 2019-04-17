@@ -2,13 +2,14 @@ import React from "react";
 import { useZoom } from "./useZoom";
 import useKey from "./useKey";
 import { usePan } from "./usePan";
+import { useDrawRects } from "./useDrawRects";
 
 export default function App({ boundingClientRect = {}, resetViewbox }) {
   const { width, height } = boundingClientRect;
   const [viewBox, setViewBox] = React.useState([0, 0, width, height]);
   const { onWheel } = useZoom(viewBox, setViewBox, width, height);
   const { onMouseDown: pan } = usePan(viewBox, setViewBox, width, height);
-  //const { onMouseDown: draw, element } = draw(viewBox, width, height); TODO
+  const { onMouseDown: draw, rects } = useDrawRects(boundingClientRect, viewBox);
   const modifier = useKey("Shift");
 
   return (
@@ -19,7 +20,7 @@ export default function App({ boundingClientRect = {}, resetViewbox }) {
       onWheel={onWheel}
       onMouseDown={e => {
         if (modifier) pan(e);
-        //  else draw(e);
+         else draw(e);
       }}
       onDoubleClick={e => {
         setViewBox([0, 0, width, height]);
@@ -32,6 +33,17 @@ export default function App({ boundingClientRect = {}, resetViewbox }) {
         width={`${width}px`}
         height={`${height}px`}
       />
+      {rects.map(rect => (
+        <rect
+          x={rect.x}
+          y={rect.y}
+          width={rect.width}
+          height={rect.height}
+          fill="none"
+          stroke="blue"
+          stokeWidth="2"
+        />
+      ))}
     </svg>
   );
 }
