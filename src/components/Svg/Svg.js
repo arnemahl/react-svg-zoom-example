@@ -41,7 +41,7 @@ export default function App({ boundingClientRect = {}, resetViewbox }) {
           height={rect.height}
           fill="none"
           stroke="blue"
-          stokeWidth="2"
+          strokeWidth="2"
         />
       ))}
     </svg>
