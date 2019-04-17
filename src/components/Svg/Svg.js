@@ -19,7 +19,7 @@ export default function App({ width, height }) {
       }}
     >
       <image
-        href="https://3lhowb48prep40031529g5yj-wpengine.netdna-ssl.com/wp-content/uploads/2012/09/photo22.jpg"
+        href="img.jpg"
         x={0}
         y={0}
         width={`${width}px`}
