@@ -5,6 +5,8 @@ export function useDrawRects(boundingClientRect, viewBox) {
   const [finishedRects, setFinishedRects] = React.useState([]);
 
   const getPos = React.useMemo(() => (event) => {
+    const [viewBoxX, viewBoxY, viewBoxWidth, viewBoxHeight] = viewBox;
+
     return {
       x: event.screenX - boundingClientRect.x,
       y: event.screenY - boundingClientRect.y,
