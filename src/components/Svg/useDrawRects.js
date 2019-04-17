@@ -18,7 +18,7 @@ export function useDrawRects(boundingClientRect, viewBox) {
         end: getPos(event),
       });
     },
-    [getPos, setRect]
+    [getPos, setRect],
   );
 
   // onMouseMove
@@ -39,18 +39,21 @@ export function useDrawRects(boundingClientRect, viewBox) {
     };
   }, [getPos, rect, setRect]);
 
-  const formatRect = React.useMemo(() => ({ start, end }) => {
-    const x = Math.min(start.x, end.x);
-    const y = Math.min(start.y, end.y);
-    const width = Math.max(start.x, end.x) - x;
-    const height = Math.max(start.y, end.y) - y;
-    return { x, y, width, height };
-  }, [])
+  const formatRect = React.useMemo(
+    () => ({ start, end }) => {
+      const x = Math.min(start.x, end.x);
+      const y = Math.min(start.y, end.y);
+      const width = Math.max(start.x, end.x) - x;
+      const height = Math.max(start.y, end.y) - y;
+      return { x, y, width, height };
+    },
+    [],
+  );
 
   const allRects = React.useMemo(
-    () => rect ? finishedRects.concat(formatRect(rect)) : finishedRects,
+    () => (rect ? finishedRects.concat(formatRect(rect)) : finishedRects),
     [finishedRects, formatRect, rect],
-  )
+  );
 
   // onMouseUp
   React.useEffect(() => {
