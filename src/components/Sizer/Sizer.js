@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { SizeMe } from "react-sizeme";
 
 export default class Sizer extends Component {
   state = {
@@ -47,6 +46,7 @@ export default class Sizer extends Component {
           }}
           onLoad={this.onImgLoad}
           src="img.jpg"
+          alt="User-selected"
         />
         <div>
           {this.state.render &&

@@ -5,7 +5,7 @@ import { usePan } from "./usePan";
 
 export default function App({ width, height, resetViewbox }) {
   const [viewBox, setViewBox] = React.useState([0, 0, width, height]);
-  const { onWheel, zoom } = useZoom(viewBox, setViewBox, width, height);
+  const { onWheel } = useZoom(viewBox, setViewBox, width, height);
   const { onMouseDown: pan } = usePan(viewBox, setViewBox, width, height);
   //const { onMouseDown: draw, element } = draw(viewBox, width, height); TODO
   const modifier = useKey("Shift");
