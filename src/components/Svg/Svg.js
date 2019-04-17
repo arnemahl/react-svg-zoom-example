@@ -3,7 +3,8 @@ import { useZoom } from "./useZoom";
 import useKey from "./useKey";
 import { usePan } from "./usePan";
 
-export default function App({ width, height, resetViewbox }) {
+export default function App({ boundingClientRect = {}, resetViewbox }) {
+  const { width, height } = boundingClientRect;
   const [viewBox, setViewBox] = React.useState([0, 0, width, height]);
   const { onWheel } = useZoom(viewBox, setViewBox, width, height);
   const { onMouseDown: pan } = usePan(viewBox, setViewBox, width, height);

@@ -2,8 +2,7 @@ import React, { Component } from "react";
 
 export default class Sizer extends Component {
   state = {
-    width: undefined,
-    height: undefined,
+    boundingClientRect: undefined,
     resize: false,
     render: false
   };
@@ -18,15 +17,13 @@ export default class Sizer extends Component {
 
   updateDimensions = () => {
     this.setState({
-      height: this.img.offsetHeight,
-      width: this.img.offsetWidth
+      boundingClientRect: this.img.getBoundingClientRect(),
     });
   };
 
   onImgLoad = ({ target: img }) => {
     this.setState({
-      height: img.offsetHeight,
-      width: img.offsetWidth,
+      boundingClientRect: this.img.getBoundingClientRect(),
       render: true
     });
   };
@@ -51,8 +48,7 @@ export default class Sizer extends Component {
         <div>
           {this.state.render &&
             React.cloneElement(this.props.children, {
-              width: this.state.width,
-              height: this.state.height
+              boundingClientRect: this.state.boundingClientRect,
             })}
         </div>
       </div>
