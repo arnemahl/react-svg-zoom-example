@@ -8,8 +8,8 @@ export function useDrawRects(boundingClientRect, viewBox) {
     const [viewBoxX, viewBoxY, viewBoxWidth, viewBoxHeight] = viewBox;
 
     return {
-      x: event.screenX - boundingClientRect.x,
-      y: event.screenY - boundingClientRect.y,
+      x: event.screenX,
+      y: event.screenY,
     };
   }, [boundingClientRect, viewBox]);
 
