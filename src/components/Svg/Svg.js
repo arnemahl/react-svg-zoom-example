@@ -16,6 +16,9 @@ export default function App({ width, height }) {
       viewBox={viewBox.join(" ")}
       onWheel={onWheel}
       onMouseDown={onMouseDown}
+      onDoubleClick={e => {
+        setViewBox([0, 0, fullWidth, fullHeight]);
+      }}
     >
       <image
         href="https://3lhowb48prep40031529g5yj-wpengine.netdna-ssl.com/wp-content/uploads/2012/09/photo22.jpg"
