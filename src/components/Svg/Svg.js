@@ -1,11 +1,14 @@
 import React from "react";
 import { useZoom } from "./useZoom";
+import useKey from "./useKey";
 import { usePan } from "./usePan";
 
 export default function App({ width, height }) {
   const [viewBox, setViewBox] = React.useState([0, 0, width, height]);
   const { onWheel } = useZoom(viewBox, setViewBox, width, height);
-  const { onMouseDown } = usePan(viewBox, setViewBox, width, height);
+  const { onMouseDown: pan } = usePan(viewBox, setViewBox, width, height);
+  //const { onMouseDown: draw, element } = draw(viewBox, width, height); TODO
+  const modifier = useKey("Shift");
 
   return (
     <svg
@@ -13,7 +16,10 @@ export default function App({ width, height }) {
       height={`${height}px`}
       viewBox={viewBox.join(" ")}
       onWheel={onWheel}
-      onMouseDown={onMouseDown}
+      onMouseDown={e => {
+        if (modifier) pan(e);
+        //  else draw(e);
+      }}
       onDoubleClick={e => {
         setViewBox([0, 0, width, height]);
       }}
