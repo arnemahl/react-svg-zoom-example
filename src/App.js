@@ -1,5 +1,6 @@
 import React from "react";
 import Svg from "components/Svg/Svg";
+import Sizer from "components/Sizer/Sizer";
 
 export default function App() {
   return (
@@ -9,9 +10,11 @@ export default function App() {
         justifyContent: "center"
       }}
     >
-      <div>
+      <div style={{ width: "100%", maxWidth: "1000px" }}>
         <h1>Hello</h1>
-        <Svg height={675} width={900} />
+        <Sizer>
+          <Svg />
+        </Sizer>
       </div>
     </div>
   );
