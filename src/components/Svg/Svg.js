@@ -6,8 +6,8 @@ import { usePan } from "./usePan";
 export default function App({ width, height }) {
   const [viewBox, setViewBox] = React.useState([0, 0, fullWidth, fullHeight]);
 
-  const { onWheel, zoom } = useZoom(viewBox, setViewBox);
-  const { onMouseDown } = usePan(viewBox, setViewBox, zoom);
+  const { onWheel } = useZoom(viewBox, setViewBox);
+  const { onMouseDown } = usePan(viewBox, setViewBox);
 
   return (
     <svg
