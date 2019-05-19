@@ -1,4 +1,7 @@
 import React from "react";
+import ImageMarker from "components/ImageMarker/ImageMarker"
+
+const imageUrls = ["/img.jpg"];
 
 export default function App() {
   return (
@@ -10,6 +13,9 @@ export default function App() {
     >
       <div style={{ width: "100%", maxWidth: "1000px" }}>
         <h1>Hello</h1>
+        {imageUrls.map(src => (
+          <ImageMarker key={src} src={src} />
+        ))}
       </div>
     </div>
   );
